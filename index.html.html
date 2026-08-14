@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adriel Daru Kusuma | Legal & Creative Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js for interactions -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: {
+                            DEFAULT: '#7A1F2B',
+                            dark: '#5C1420',
+                        },
+                        navy: {
+                            DEFAULT: '#0F1B33',
+                            light: '#1A2B4C',
+                        },
+                        cream: {
+                            DEFAULT: '#F4F1EC',
+                            dark: '#E5E0D8',
+                        },
+                        gold: {
+                            DEFAULT: '#C9A227',
+                            light: '#DFBD4F',
+                        },
+                        dark: '#1A1A1A'
+                    },
+                    fontFamily: {
+                        heading: ['Oswald', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F4F1EC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7A1F2B;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5C1420;
+        }
+
+        /* Large Background Numbers */
+        .bg-number {
+            position: absolute;
+            font-size: 20rem;
+            line-height: 1;
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+            color: currentColor;
+            opacity: 0.05;
+            top: -2rem;
+            right: -2rem;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+        }
+        
+        @media (max-width: 768px) {
+            .bg-number {
+                font-size: 10rem;
+                top: 0;
+                right: 0;
+            }
+        }
+
+        /* Dashed Divider Utility */
+        .dashed-divider {
+            border-bottom: 2px dashed #C9A227;
+            width: 60px;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Mockup Card Hover Effect */
+        .mockup-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mockup-card:hover {
+            transform: translateY(-10px);
+            border-color: #C9A227;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Subtle texture overlay */
+        .texture-overlay {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="font-body text-dark bg-cream antialiased selection:bg-gold selection:text-navy">
+
+    <!-- Navigation -->
+    <nav x-data="{ isOpen: false, scrolled: false }" 
+         @scroll.window="scrolled = (window.pageYOffset > 50) ? true : false"
+         :class="{'bg-navy/95 backdrop-blur-md shadow-lg': scrolled, 'bg-transparent': !scrolled}"
+         class="fixed w-full z-50 transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-heading font-bold text-2xl tracking-wider transition-colors duration-300"
+                       :class="{'text-white': scrolled, 'text-navy': !scrolled}">
+                        ADRIEL<span class="text-gold">.</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <template x-for="item in ['About', 'Experience', 'Portfolio', 'Skills', 'Contact']">
+                        <a :href="'#' + item.toLowerCase()" 
+                           class="font-heading uppercase tracking-widest text-sm font-medium hover:text-gold transition-colors duration-300"
+                           :class="{'text-gray-300': scrolled, 'text-dark': !scrolled}"
+                           x-text="item"></a>
+                    </template>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button @click="isOpen = !isOpen" type="button" 
+                            class="hover:text-gold focus:outline-none transition-colors duration-300"
+                            :class="{'text-white': scrolled, 'text-dark': !scrolled}">
+                        <i class="fas fa-bars text-2xl" x-show="!isOpen"></i>
+                        <i class="fas fa-times text-2xl" x-show="isOpen" x-cloak></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div x-show="isOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-2"
+             class="md:hidden bg-navy absolute w-full shadow-xl" x-cloak>
+            <div class="px-4 pt-2 pb-6 space-y-1 sm:px-3 text-center">
+                <template x-for="item in ['About', 'Experience', 'Portfolio', 'Skills', 'Contact']">
+                    <a :href="'#' + item.toLowerCase()" 
+                       @click="isOpen = false"
+                       class="block px-3 py-3 font-heading uppercase tracking-widest text-white hover:text-gold transition-colors">
+                       <span x-text="item"></span>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-cream min-h-screen flex items-center pt-20 overflow-hidden" id="home">
+        <div class="texture-overlay"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Text Content -->
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <div class="flex flex-wrap gap-3 mb-6">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gold/20 text-gold-800 border border-gold/30 font-body">
+                            <i class="fas fa-graduation-cap mr-2"></i> IPK 3.93/4.00
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-maroon/10 text-maroon font-body">
+                            <i class="fas fa-award mr-2"></i> Penerima Beasiswa KIP-K
+                        </span>
+                    </div>
+                    
+                    <h1 class="font-heading font-bold text-6xl md:text-7xl lg:text-8xl text-navy leading-none mb-4 uppercase tracking-tighter">
+                        Adriel Daru <br> <span class="text-maroon">Kusuma</span>
+                    </h1>
+                    
+                    <div class="dashed-divider border-navy"></div>
+                    
+                    <h2 class="text-xl md:text-2xl font-body font-medium text-dark mb-4">
+                        Calon Sarjana Hukum Perdata <span class="text-gold px-2">✦</span> Legal Research & Practical Advocacy <span class="text-gold px-2">✦</span> Creative Multimedia Enthusiast
+                    </h2>
+                    
+                    <p class="text-gray-600 mb-8 max-w-lg font-body leading-relaxed">
+                        Mahasiswa Semester 7 Fakultas Hukum Universitas Lampung. Berfokus pada Hukum Bisnis, Kepailitan, Perbankan & Jaminan, dengan kemampuan ganda dalam analisis legal dan komunikasi visual.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#portfolio" class="inline-flex justify-center items-center px-8 py-4 bg-maroon text-white rounded-none font-heading uppercase tracking-widest hover:bg-maroon-dark transition duration-300 group">
+                            Lihat Portofolio
+                            <i class="fas fa-arrow-right ml-3 transform group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#contact" class="inline-flex justify-center items-center px-8 py-4 border-2 border-navy text-navy rounded-none font-heading uppercase tracking-widest hover:bg-navy hover:text-white transition duration-300">
+                            Hubungi Saya
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Image/Visual Content -->
+                <div class="relative" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="absolute inset-0 bg-maroon transform translate-x-4 translate-y-4 -z-10"></div>
+                    <img src="https://placehold.co/600x800/0F1B33/F4F1EC?text=Adriel+Daru+Kusuma" alt="Potret Adriel Daru Kusuma" class="w-full h-auto object-cover grayscale hover:grayscale-0 transition duration-500 shadow-2xl">
+                    
+                    <!-- Decorative Element -->
+                    <div class="absolute -top-6 -right-6 text-gold animate-spin-slow opacity-70">
+                        <svg width="100" height="100" viewBox="0 0 100 100">
+                            <path d="M50 0 L55 45 L100 50 L55 55 L50 100 L45 55 L0 50 L45 45 Z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Quick Stats -->
+    <div class="bg-gold py-8 border-y-2 border-dark relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-dark/20">
+                <div class="py-2" data-aos="zoom-in" data-aos-delay="100">
+                    <p class="font-heading text-4xl font-bold text-navy"><span class="counter" data-target="5">0</span>+</p>
+                    <p class="font-body text-sm font-semibold uppercase tracking-wider text-dark mt-1">Dokumen Hukum Disusun</p>
+                </div>
+                <div class="py-2" data-aos="zoom-in" data-aos-delay="200">
+                    <p class="font-heading text-4xl font-bold text-navy"><span class="counter" data-target="4">0</span></p>
+                    <p class="font-body text-sm font-semibold uppercase tracking-wider text-dark mt-1">Kompetisi Moot Court</p>
+                </div>
+                <div class="py-2" data-aos="zoom-in" data-aos-delay="300">
+                    <p class="font-heading text-4xl font-bold text-navy"><span class="counter" data-target="29">0</span></p>
+                    <p class="font-body text-sm font-semibold uppercase tracking-wider text-dark mt-1">Aset Visual Didesain</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="bg-navy text-cream py-24 relative overflow-hidden">
+        <div class="texture-overlay opacity-5"></div>
+        <div class="bg-number text-white">01</div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 section-content">
+            <div data-aos="fade-up">
+                <h2 class="font-heading text-5xl md:text-6xl font-bold uppercase tracking-wide">About <span class="text-gold">Me</span></h2>
+                <div class="dashed-divider"></div>
+                
+                <div class="prose prose-lg prose-invert font-body mt-8">
+                    <p class="text-xl leading-relaxed text-gray-300">
+                        Saya adalah mahasiswa Ilmu Hukum Fakultas Hukum Universitas Lampung yang memiliki pemahaman komprehensif terkait Hukum Perdata Indonesia. 
+                    </p>
+                    <p class="leading-relaxed text-gray-400 mt-6">
+                        Bagi saya, hukum bukan sekadar teks akademis, melainkan instrumen hidup yang saya terapkan melalui analisis studi kasus konkret dan partisipasi aktif dalam kompetisi peradilan semu (moot court) tingkat internal hingga nasional. Pengalaman ini mengasah insting hukum acara dan advokasi praktis saya.
+                    </p>
+                    <p class="leading-relaxed text-gray-400 mt-4">
+                        Saat ini, saya tengah mendedikasikan diri untuk mendalami ranah <strong class="text-cream">Hukum Bisnis, Kepailitan, Perbankan, dan Hukum Jaminan</strong>. Di sisi lain, saya menyeimbangkan logika hukum yang kaku dengan pendekatan kreatif melalui desain grafis dan manajemen multimedia untuk berbagai organisasi.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience Section -->
+    <section id="experience" class="bg-cream text-dark py-24 relative overflow-hidden">
+        <div class="bg-number text-maroon opacity-5">02</div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-content">
+            <div class="mb-16" data-aos="fade-right">
+                <h2 class="font-heading text-5xl md:text-6xl font-bold text-maroon uppercase tracking-wide">Professional <br>Experience</h2>
+                <div class="dashed-divider border-maroon"></div>
+            </div>
+
+            <div class="bg-white border-l-4 border-gold p-8 md:p-10 shadow-xl" data-aos="fade-up">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                    <div>
+                        <h3 class="font-heading text-3xl font-bold text-navy uppercase">Kantor Hukum D.R.S & Partners</h3>
+                        <p class="font-body text-maroon font-semibold mt-1">Branch Lampung | Junior Legal Assistant</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 font-body text-sm font-bold bg-navy text-white px-4 py-2 uppercase tracking-wider inline-block">
+                        Jul – Agu 2026
+                    </div>
+                </div>
+                
+                <ul class="space-y-4 font-body text-gray-700">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-gold mt-1 mr-3"></i>
+                        <span>Menyusun <strong>5+ dokumen hukum</strong> (Surat Somasi, Surat Audiensi, SKB Perdamaian) untuk perkara pidana & perdata.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-gold mt-1 mr-3"></i>
+                        <span>Merevisi draf Gugatan Wanprestasi PT Farmsco Feed Indonesia vs PT SKM.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-gold mt-1 mr-3"></i>
+                        <span>Riset yurisprudensi Mahkamah Agung untuk <strong>2 Legal Opinion</strong> terkait sengketa PMH sektor perbankan.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-gold mt-1 mr-3"></i>
+                        <span>Produksi konten edukasi hukum TikTok & materi Zoom Meeting Nasional yang menghubungkan 14 kantor cabang se-Indonesia.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizational Experience Section -->
+    <section class="bg-maroon text-cream py-24 relative overflow-hidden">
+        <div class="texture-overlay opacity-10"></div>
+        <div class="bg-number text-white opacity-5">03</div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-content">
+            <div class="mb-16 text-center" data-aos="fade-up">
+                <h2 class="font-heading text-5xl md:text-6xl font-bold uppercase tracking-wide">Organizational <br>Experience</h2>
+                <div class="dashed-divider border-gold mx-auto"></div>
+                <p class="font-body text-gold uppercase tracking-widest text-sm">UKM-F Pusat Studi Bantuan Hukum (PSBH), FH Unila</p>
+            </div>
+
+            <div class="space-y-6 max-w-4xl mx-auto">
+                <!-- Accordion Item 1 -->
+                <div x-data="{ expanded: true }" class="bg-maroon-dark border border-white/20" data-aos="fade-up" data-aos-delay="100">
+                    <button @click="expanded = !expanded" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-white/5 transition-colors">
+                        <div>
+                            <h3 class="font-heading text-2xl font-semibold uppercase">Pengurus Bidang Kominfo</h3>
+                            <p class="font-body text-sm text-gold mt-1">Maret 2026 – Sekarang</p>
+                        </div>
+                        <i class="fas fa-chevron-down transition-transform duration-300" :class="expanded ? 'rotate-180 text-gold' : 'text-white'"></i>
+                    </button>
+                    <div x-show="expanded" x-collapse>
+                        <div class="px-6 pb-6 pt-2 font-body text-gray-300 border-t border-white/10 mt-2">
+                            <ul class="space-y-3">
+                                <li><span class="text-gold mr-2">✦</span> Produksi 4+ seri konten "Mooters Pedia" & carousel "International News".</li>
+                                <li><span class="text-gold mr-2">✦</span> Mendesain 29 stiker WhatsApp untuk keperluan engagement organisasi.</li>
+                                <li><span class="text-gold mr-2">✦</span> Merancang materi publikasi untuk event NMCC Pidana & Perdata 2026.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div x-data="{ expanded: false }" class="bg-maroon-dark border border-white/20" data-aos="fade-up" data-aos-delay="200">
+                    <button @click="expanded = !expanded" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-white/5 transition-colors">
+                        <div>
+                            <h3 class="font-heading text-2xl font-semibold uppercase">Panitia Peskajur NMCC Anti Human Trafficking</h3>
+                            <p class="font-body text-sm text-gold mt-1">Januari – Mei 2025</p>
+                        </div>
+                        <i class="fas fa-chevron-down transition-transform duration-300" :class="expanded ? 'rotate-180 text-gold' : 'text-white'"></i>
+                    </button>
+                    <div x-show="expanded" x-collapse x-cloak>
+                        <div class="px-6 pb-6 pt-2 font-body text-gray-300 border-t border-white/10 mt-2">
+                            <ul class="space-y-3">
+                                <li><span class="text-gold mr-2">✦</span> Bertindak sebagai Liaison Officer (LO) untuk dewan juri.</li>
+                                <li><span class="text-gold mr-2">✦</span> Mendampingi langsung Hakim Tinggi Pengadilan Tinggi Tanjungkarang selama kegiatan berlangsung.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div x-data="{ expanded: false }" class="bg-maroon-dark border border-white/20" data-aos="fade-up" data-aos-delay="300">
+                    <button @click="expanded = !expanded" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-white/5 transition-colors">
+                        <div>
+                            <h3 class="font-heading text-2xl font-semibold uppercase">Anggota Muda & Tetap</h3>
+                            <p class="font-body text-sm text-gold mt-1">Oktober 2024 – Desember 2025</p>
+                        </div>
+                        <i class="fas fa-chevron-down transition-transform duration-300" :class="expanded ? 'rotate-180 text-gold' : 'text-white'"></i>
+                    </button>
+                    <div x-show="expanded" x-collapse x-cloak>
+                        <div class="px-6 pb-6 pt-2 font-body text-gray-300 border-t border-white/10 mt-2">
+                            <ul class="space-y-3">
+                                <li><span class="text-gold mr-2">✦</span> Menjadi delegasi untuk IMCC 2024 & NMCC Pringgodigdo 2025.</li>
+                                <li><span class="text-gold mr-2">✦</span> Bertugas sebagai tutor pembimbing pada IMCC 2025.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moot Court Experience -->
+    <section class="bg-cream text-dark py-24 relative overflow-hidden">
+        <div class="bg-number text-navy opacity-5">04</div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-content">
+            <div class="mb-16" data-aos="fade-right">
+                <h2 class="font-heading text-5xl md:text-6xl font-bold text-navy uppercase tracking-wide">Moot Court <br>Experience</h2>
+                <div class="dashed-divider border-navy"></div>
+                <p class="font-body max-w-2xl text-gray-600">Perjalanan karantina intensif dan advokasi praktis melalui kompetisi peradilan semu tingkat internal hingga nasional.</p>
+            </div>
+
+            <div class="relative border-l-2 border-dashed border-gold ml-3 md:ml-6 space-y-12 pb-4">
+                
+                <!-- Timeline Item 1 -->
+                <div class="relative pl-8 md:pl-12" data-aos="fade-up">
+                    <div class="absolute w-6 h-6 bg-maroon rounded-full -left-[13px] top-1 border-4 border-cream flex items-center justify-center">
+                        <div class="w-2 h-2 bg-gold rounded-full"></div>
+                    </div>
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-navy uppercase">NMCC Bulaksumur VII 2026</h3>
+                    <p class="font-body font-semibold text-maroon mb-2">Universitas Gadjah Mada (UGM) <span class="text-dark mx-2">|</span> Formatur/Mentor <span class="text-gray-500 font-normal text-sm ml-2">Maret 2026 – Sekarang</span></p>
+                    <p class="font-body text-gray-700">Membimbing tim dan mentransfer pengetahuan terkait hukum acara perdata serta strategi persidangan tingkat nasional.</p>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative pl-8 md:pl-12" data-aos="fade-up">
+                    <div class="absolute w-6 h-6 bg-navy rounded-full -left-[13px] top-1 border-4 border-cream"></div>
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-navy uppercase">Internal Mootcourt Piala Prof. Sunarto 2025</h3>
+                    <p class="font-body font-semibold text-maroon mb-2">Universitas Lampung <span class="text-dark mx-2">|</span> Tutor <span class="text-gray-500 font-normal text-sm ml-2">Nov – Des 2025</span></p>
+                    <p class="font-body text-gray-700">Mendampingi secara intensif 16 mahasiswa selama masa karantina 30 hari untuk persiapan pemberkasan dan persidangan.</p>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative pl-8 md:pl-12" data-aos="fade-up">
+                    <div class="absolute w-6 h-6 bg-navy rounded-full -left-[13px] top-1 border-4 border-cream"></div>
+                    <div class="bg-white p-6 rounded-none border border-gray-200 shadow-md relative">
+                        <div class="absolute top-0 right-0 bg-gold text-navy text-xs font-bold px-3 py-1 uppercase tracking-wider">Achievement Heavy</div>
+                        <h3 class="font-heading text-2xl md:text-3xl font-bold text-navy uppercase mt-2">NMCC Piala A.G. Pringgodigdo X 2025</h3>
+                        <p class="font-body font-semibold text-maroon mb-3">Universitas Airlangga (Unair) <span class="text-dark mx-2">|</span> Delegasi <span class="text-gray-500 font-normal text-sm ml-2">Apr – Okt 2025</span></p>
+                        <p class="font-body text-gray-700 mb-2"><i class="fas fa-caret-right text-gold mr-2"></i>Menjalani karantina intensif selama 7 bulan penuh.</p>
+                        <p class="font-body text-gray-700"><i class="fas fa-caret-right text-gold mr-2"></i>Fokus area kasus: Hukum Kepailitan & PKPU, serta sengketa Hak Cipta.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="relative pl-8 md:pl-12" data-aos="fade-up">
+                    <div class="absolute w-6 h-6 bg-navy rounded-full -left-[13px] top-1 border-4 border-cream"></div>
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-navy uppercase">Internal Mootcourt Piala Prof. Sunarto 2024</h3>
+                    <p class="font-body font-semibold text-maroon mb-2">Universitas Lampung <span class="text-dark mx-2">|</span> Delegasi <span class="text-gray-500 font-normal text-sm ml-2">Okt – Des 2024</span></p>
+                    <p class="font-body text-gray-700">Berperan sebagai delegasi dengan fokus pada kasus Tindak Pidana Narkotika.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creative Portfolio Section -->
+    <section id="portfolio" class="bg-navy text-cream py-24 relative overflow-hidden">
+        <div class="texture-overlay"></div>
+        <div class="bg-number text-white opacity-5">05</div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-content">
+            <div class="mb-16 text-center" data-aos="fade-up">
+                <h2 class="font-heading text-5xl md:text-6xl font-bold uppercase tracking-wide">Creative <span class="text-gold">Portfolio</span></h2>
+                <div class="dashed-divider border-gold mx-auto"></div>
+                <p class="font-body text-gray-400 max-w-2xl mx-auto">Sisi kreatif dalam desain grafis, editing video, dan manajemen media sosial.</p>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+                
+                <!-- Portfolio Item 1 -->
+                <div class="mockup-card bg-navy-light rounded-xl overflow-hidden border border-white/10 group relative" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://placehold.co/800x600/1A2B4C/C9A227?text=GKMI+El-Shaddai+Feeds" alt="Mockup Instagram Feed GKMI El-Shaddai" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="bg-maroon text-xs font-bold px-2 py-1 uppercase rounded text-white mb-2 inline-block">Design & SocMed</span>
+                            <h3 class="font-heading text-2xl text-white font-bold uppercase">GKMI El-Shaddai</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="font-body text-sm text-gold font-semibold mb-2">Koordinator Tim Multimedia</p>
+                        <p class="font-body text-gray-400 text-sm">Bertanggung jawab atas visual branding gereja. Mendesain template feed/carousel, reels, konten news, dan live report untuk berbagai platform media sosial.</p>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2 -->
+                <div class="mockup-card bg-navy-light rounded-xl overflow-hidden border border-white/10 group relative" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://placehold.co/800x600/7A1F2B/F4F1EC?text=PSBH+Campaigns" alt="Desain Grafis PSBH FH Unila" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="bg-gold text-xs font-bold px-2 py-1 text-navy uppercase rounded mb-2 inline-block">Content Creation</span>
+                            <h3 class="font-heading text-2xl text-white font-bold uppercase">PSBH FH Unila</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="font-body text-sm text-gold font-semibold mb-2">Anggota Kominfo</p>
+                        <p class="font-body text-gray-400 text-sm">Kreator seri konten edukasi hukum "Mooters Pedia" dan "International News". Mendesain materi publikasi komprehensif untuk berbagai event besar organisasi.</p>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3 -->
+                <div class="mockup-card bg-navy-light rounded-xl overflow-hidden border border-white/10 group relative" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://placehold.co/800x600/1A1A1A/F4F1EC?text=KKN+Karang+Anyar+Visuals" alt="Desain Banner & Kampanye KKN" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="bg-blue-600 text-xs font-bold px-2 py-1 uppercase rounded text-white mb-2 inline-block">Event Campaign</span>
+                            <h3 class="font-heading text-2xl text-white font-bold uppercase">KKN Karang Anyar II '26</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="font-body text-sm text-gold font-semibold mb-2">Koordinator Divisi Kominfo</p>
+                        <p class="font-body text-gray-400 text-sm">Mengeksekusi kebutuhan visual program desa: mendesain banner posko, memproduksi stiker kampanye edukasi, dan mengelola live report kegiatan masyarakat.</p>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 4 -->
+                <div class="mockup-card bg-navy-light rounded-xl overflow-hidden border border-white/10 group relative" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://placehold.co/800x600/5C1420/C9A227?text=DRS+Meeting+Materials" alt="Materi Presentasi D.R.S & Partners" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="bg-gray-700 text-xs font-bold px-2 py-1 uppercase rounded text-white mb-2 inline-block">Corporate Visuals</span>
+                            <h3 class="font-heading text-2xl text-white font-bold uppercase">D.R.S & Partners</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="font-body text-sm text-gold font-semibold mb-2">Kontributor Materi Nasional</p>
+                        <p class="font-body text-gray-400 text-sm">Menyiapkan materi visual dan presentasi untuk Meeting Nasional. <br><span class="text-white mt-1 block">🏆 Achievement: 5 Terbaik Cabang Nasional & 15 Terbaik Personal Nasional Semester I 2026.</span></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="bg-cream py-24 relative overflow-hidden">
+        <div class="bg-number text-maroon opacity-5">06</div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-content">
+            <div class="mb-12 text-center" data-aos="fade-up">
+                <h2 class="font-heading text-5xl md:text-6xl font-bold text-navy uppercase tracking-wide">Skills & <span class="text-maroon">Expertise</span></h2>
+                <div class="dashed-divider border-maroon mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Hard Skills -->
+                <div class="bg-white p-8 border-t-4 border-navy shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-heading text-2xl font-bold text-navy mb-6 uppercase flex items-center">
+                        <i class="fas fa-laptop-code text-gold mr-3"></i> Hard Skills
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-gray-100 text-dark font-body text-sm font-medium border border-gray-200">Canva</span>
+                        <span class="px-4 py-2 bg-gray-100 text-dark font-body text-sm font-medium border border-gray-200">CapCut</span>
+                        <span class="px-4 py-2 bg-gray-100 text-dark font-body text-sm font-medium border border-gray-200">Microsoft Word</span>
+                        <span class="px-4 py-2 bg-gray-100 text-dark font-body text-sm font-medium border border-gray-200">Excel</span>
+                        <span class="px-4 py-2 bg-gray-100 text-dark font-body text-sm font-medium border border-gray-200">PowerPoint</span>
+                        <span class="px-4 py-2 bg-gray-100 text-dark font-body text-sm font-medium border border-gray-200">Google Workspace</span>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="bg-white p-8 border-t-4 border-maroon shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="font-heading text-2xl font-bold text-maroon mb-6 uppercase flex items-center">
+                        <i class="fas fa-users-cog text-gold mr-3"></i> Soft Skills
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-maroon/10 text-maroon font-body text-sm font-medium">Manajemen Data & Dokumen</span>
+                        <span class="px-4 py-2 bg-maroon/10 text-maroon font-body text-sm font-medium">Manajemen Arsip</span>
+                        <span class="px-4 py-2 bg-maroon/10 text-maroon font-body text-sm font-medium">Pemberkasan Perkara</span>
+                        <span class="px-4 py-2 bg-maroon/10 text-maroon font-body text-sm font-medium">Editing & Desain Grafis</span>
+                    </div>
+                </div>
+
+                <!-- Bahasa -->
+                <div class="bg-white p-8 border-t-4 border-gold shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="font-heading text-2xl font-bold text-navy mb-6 uppercase flex items-center">
+                        <i class="fas fa-globe text-gold mr-3"></i> Bahasa
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between font-body text-sm font-bold text-dark mb-1">
+                                <span>Indonesia</span>
+                                <span class="text-gold">Native</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-2">
+                                <div class="bg-gold h-2 w-full"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between font-body text-sm font-bold text-dark mb-1 mt-4">
+                                <span>English</span>
+                                <span class="text-maroon">B2 Upper Intermediate</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-2">
+                                <div class="bg-maroon h-2 w-3/4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="bg-maroon text-cream py-24 relative overflow-hidden">
+        <div class="texture-overlay opacity-10"></div>
+        <div class="bg-number text-white opacity-5">07</div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-content">
+            <div class="mb-12" data-aos="fade-right">
+                <h2 class="font-heading text-5xl md:text-6xl font-bold uppercase tracking-wide">Certifications</h2>
+                <div class="dashed-divider border-gold"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Cert 1 -->
+                <div class="bg-maroon-dark border border-white/20 p-6 flex items-start group hover:border-gold transition-colors" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-gold/20 p-3 rounded-full mr-4 group-hover:bg-gold group-hover:text-navy transition-colors text-gold">
+                        <i class="fas fa-certificate text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-heading font-semibold text-xl uppercase mb-1">Canva for Design Specialization</h3>
+                        <p class="font-body text-gold text-sm font-medium mb-2">MySkill</p>
+                        <p class="font-body text-xs text-gray-400 bg-black/20 inline-block px-2 py-1">Juni 2026</p>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="bg-maroon-dark border border-white/20 p-6 flex items-start group hover:border-gold transition-colors" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-gold/20 p-3 rounded-full mr-4 group-hover:bg-gold group-hover:text-navy transition-colors text-gold">
+                        <i class="fas fa-gavel text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-heading font-semibold text-xl uppercase mb-1">Legal Opinion Drafting</h3>
+                        <p class="font-body text-gold text-sm font-medium mb-2">Infinite Justice x AVODAH Attorneys</p>
+                        <p class="font-body text-xs text-gray-400 bg-black/20 inline-block px-2 py-1">Februari 2025</p>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="bg-maroon-dark border border-white/20 p-6 flex items-start group hover:border-gold transition-colors" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-gold/20 p-3 rounded-full mr-4 group-hover:bg-gold group-hover:text-navy transition-colors text-gold">
+                        <i class="fas fa-robot text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-heading font-semibold text-xl uppercase mb-1">Integrasi AI dalam Penulisan & Review Artikel Ilmiah Hukum</h3>
+                        <p class="font-body text-gold text-sm font-medium mb-2">Hukum Online</p>
+                        <p class="font-body text-xs text-gray-400 bg-black/20 inline-block px-2 py-1">Februari 2025</p>
+                    </div>
+                </div>
+
+                <!-- Cert 4 -->
+                <div class="bg-maroon-dark border border-white/20 p-6 flex items-start group hover:border-gold transition-colors" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-gold/20 p-3 rounded-full mr-4 group-hover:bg-gold group-hover:text-navy transition-colors text-gold">
+                        <i class="fas fa-book-journal-whills text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-heading font-semibold text-xl uppercase mb-1">Panduan Publikasi Jurnal Nasional</h3>
+                        <p class="font-body text-gold text-sm font-medium mb-2">Hukum Online</p>
+                        <p class="font-body text-xs text-gray-400 bg-black/20 inline-block px-2 py-1">Februari 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-navy text-cream py-24 relative overflow-hidden">
+        <div class="texture-overlay"></div>
+        <div class="bg-number text-white opacity-5">08</div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-content">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <!-- Contact Info -->
+                <div data-aos="fade-right">
+                    <h2 class="font-heading text-5xl md:text-6xl font-bold uppercase tracking-wide mb-2">Let's <span class="text-gold">Connect</span></h2>
+                    <div class="dashed-divider border-gold"></div>
+                    <p class="font-body text-gray-400 mb-8 max-w-md">Terbuka untuk diskusi mengenai riset hukum, kolaborasi kreatif, atau tawaran profesional.</p>
+                    
+                    <div class="space-y-6 font-body">
+                        <a href="https://wa.me/6282160868376" target="_blank" class="flex items-center group">
+                            <div class="w-12 h-12 bg-white/10 flex items-center justify-center rounded-full text-gold group-hover:bg-gold group-hover:text-navy transition-colors mr-4">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </div>
+                            <span class="text-lg text-gray-300 group-hover:text-white transition-colors">+62 821-6086-8376</span>
+                        </a>
+                        
+                        <a href="mailto:adrieldaru05@gmail.com" class="flex items-center group">
+                            <div class="w-12 h-12 bg-white/10 flex items-center justify-center rounded-full text-gold group-hover:bg-gold group-hover:text-navy transition-colors mr-4">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <span class="text-lg text-gray-300 group-hover:text-white transition-colors">adrieldaru05@gmail.com</span>
+                        </a>
+                        
+                        <a href="https://instagram.com/drieldaru" target="_blank" class="flex items-center group">
+                            <div class="w-12 h-12 bg-white/10 flex items-center justify-center rounded-full text-gold group-hover:bg-gold group-hover:text-navy transition-colors mr-4">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </div>
+                            <span class="text-lg text-gray-300 group-hover:text-white transition-colors">@drieldaru</span>
+                        </a>
+
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-transparent border border-white/20 flex items-center justify-center rounded-full text-gray-400 mr-4">
+                                <i class="fas fa-location-dot text-xl"></i>
+                            </div>
+                            <span class="text-lg text-gray-400">Bandar Lampung, Lampung</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex gap-4">
+                        <a href="#" class="px-6 py-3 bg-[#0077b5] text-white rounded font-heading uppercase tracking-wide hover:bg-[#005e93] transition-colors inline-flex items-center">
+                            <i class="fab fa-linkedin mr-2 text-lg"></i> LinkedIn Profile
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Simple UI Form (Non-functional) -->
+                <div class="bg-navy-light p-8 md:p-10 border border-white/10 rounded-xl relative" data-aos="fade-left">
+                    <!-- Accent corner -->
+                    <div class="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-gold rounded-tr-xl"></div>
+                    
+                    <h3 class="font-heading text-2xl font-bold uppercase mb-6 text-white">Tinggalkan Pesan</h3>
+                    <form onsubmit="event.preventDefault();" class="space-y-4 font-body">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Nama Lengkap</label>
+                            <input type="text" class="w-full bg-navy border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors rounded-none" placeholder="Masukkan nama Anda">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                            <input type="email" class="w-full bg-navy border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors rounded-none" placeholder="email@contoh.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Pesan</label>
+                            <textarea rows="4" class="w-full bg-navy border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors rounded-none" placeholder="Tuliskan pesan Anda..."></textarea>
+                        </div>
+                        <button type="button" class="w-full bg-gold text-navy font-heading font-bold uppercase tracking-widest py-4 hover:bg-gold-light transition-colors mt-2">
+                            Kirim Pesan (UI Only)
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0a1222] text-gray-500 py-8 border-t border-white/5 text-center font-body text-sm relative z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 Adriel Daru Kusuma. Crafted with a blend of Legal Precision & Creative Boldness.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS Animation
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // Counter Animation Script using Intersection Observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200; // The lower the slower
+
+            const animateCounter = (counter) => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(() => animateCounter(counter), 20);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // Trigger when 50% of the element is visible
+            };
+
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        animateCounter(counter);
+                        observer.unobserve(counter); // Run only once
+                    }
+                });
+            }, observerOptions);
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+        });
+    </script>
+</body>
+</html>
